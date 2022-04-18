@@ -2,12 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Expenses from './Expenses';
 import reportWebVitals from './reportWebVitals';
+import Overview from './Overview';
+import Income from './Income';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Overview />
+    <Income />
+    <Expenses />
   </React.StrictMode>
 );
 
