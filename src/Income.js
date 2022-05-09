@@ -1,11 +1,66 @@
 
-function Income() {
-  return (
-    <div className="container rounded bg-light mb-5 mt-4 p-4">
-      <p className="h2">Income component <span class="bi bi-pencil-square h4"></span></p>
+import React, { Component } from 'react';
+  
 
-    </div>
-  );
+
+export default class Income extends Component {
+
+  userData; //Variable that we'll store data in
+
+  constructor(props) { //Constructor sets up properties for the income class
+    super(props);
+    this.onChangePrimaryIncome = this.onChangePrimaryIncome.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+        income: ''
+    }
+  }
+
+  // Form Events
+  onChangePrimaryIncome(e) {
+        this.setState({ income: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+    }
+
+    onSubmit(e) {
+        e.preventDefault()
+        this.setState({
+            income: this.state.income
+        })
+    }
+
+  // React Life Cycle
+  componentDidMount() {
+    this.userData = JSON.parse(localStorage.getItem('incomeStorage'));
+    if (localStorage.getItem('incomeStorage')) { //Searches local storage in browser for item "user" and assigns the data retrieved from the form events
+        this.setState({
+            income: this.userData.income
+        })
+    } else {
+        this.setState({
+            income: ''
+        })
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) { //This triggers before the rendering happens and sets up the form state in local storage
+    localStorage.setItem('incomeStorage', JSON.stringify(nextState));
+  }
+
+
+
+ render() {
+        return (
+          <div className="container rounded bg-light mb-5 mt-4 p-4">
+          <p className="h2">Income component <span class="bi bi-pencil-square h4"></span></p>
+          <p className='h4'>{this.state.income}</p>
+                <form onSubmit={this.onSubmit}>
+                    <div className="form-group mb-3">
+                        <label>Enter primary income:</label>
+                        <input type="text" className="form-control" value={this.state.income} onChange={this.onChangePrimaryIncome} />
+                    </div>
+                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        )
+    }
 }
-
-export default Income;
