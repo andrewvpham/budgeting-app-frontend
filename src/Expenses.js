@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 export default class Expenses extends Component {
 
-  userData; //Variable that we'll store data in
+  incomeData; //Variable that we'll store data in
 
   constructor(props) { //Constructor sets up properties for the income class
     super(props);
@@ -29,10 +29,10 @@ export default class Expenses extends Component {
 
   // React Life Cycle
   componentDidMount() {
-    this.userData = JSON.parse(localStorage.getItem('expensesStorage'));
+    this.incomeData = JSON.parse(localStorage.getItem('expensesStorage'));
     if (localStorage.getItem('expensesStorage')) { //Searches local storage in browser for item "user" and assigns the data retrieved from the form events
         this.setState({
-            expenses: this.userData.expenses
+            expenses: this.incomeData.expenses
         })
     } else {
         this.setState({
@@ -52,11 +52,11 @@ render() {
         return (
           <div className="container rounded bg-light mb-5 mt-4 p-4">
           <p className="h2">Expenses <span class="bi bi-pencil-square h6"></span></p>
-          <p className='h4'>{this.state.expenses}</p>
+          <p className='h4'>Total annual expenses: ${parseInt(this.state.expenses).toLocaleString()}</p>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group mb-3">
                         <label>Enter expenses:</label>
-                        <input type="text" className="form-control" value={this.state.expenses} onChange={this.onChangeExpenses} />
+                        <input type="number" className="form-control" value={this.state.expenses} onChange={this.onChangeExpenses} />
                     </div>
                     <button type="submit" className="btn btn-primary btn-block">Submit</button>
                 </form>

@@ -75,15 +75,16 @@ export default class Overview extends Component {
   console.log(typeof this.state.income);
   return (
     //Expenses
-      <div className="container rounded bg-light mb-5 mt-4 p-4">
-        <p className="h2">Overview component</p>
+      <div className="container rounded bg-light mb-5 mt-4 p-4 pb-5">
+        <p className="h2">Overview</p>
         <div className="row">
-        <div className="col-lg-3 mt-3">
+        <div className="col-lg-2 mt-3">
+        <p class="lead mb-0">Income Chart</p>
         <PieChart
             data={[
-              { title: 'Primary Income', value: parseInt(this.state.income), color: '#E38627'},
-              { title: 'Secondary Income', value: parseInt(this.state.secondIncome), color: '#C13C37' },
-              { title: 'Investments', value: parseInt(this.state.investments), color: '#6A2135' },
+              { title: 'Primary Income', value: parseInt(this.state.income), color: '#bc5090'},
+              { title: 'Secondary Income', value: parseInt(this.state.secondIncome), color: '#ff6361' },
+              { title: 'Investments', value: parseInt(this.state.investments), color: '#ffa600' },
             ]}
             label={({ dataEntry }) => dataEntry.value}
             labelStyle={{
@@ -91,12 +92,13 @@ export default class Overview extends Component {
             }}
           />
         </div>
-        <div className="col-lg-3 mt-3">
+        <div className="col-lg-2 mt-3 ">
+        <p class="lead mb-0">Expenses Chart</p>
         <PieChart
             data={[
-              { title: 'Entertainment', value: 10, color: '#E38627'},
-              { title: 'Food', value: 15, color: '#C13C37' },
-              { title: 'Housing', value: 20, color: '#6A2135' },
+              { title: 'Entertainment', value: 10, color: '#004c6d'},
+              { title: 'Food', value: 15, color: '#7aa6c2' },
+              { title: 'Housing', value: 20, color: '#c1e7ff' },
             ]}
             label={({ dataEntry }) => dataEntry.value}
             labelStyle={{
