@@ -19,22 +19,34 @@ export default class Overview extends Component {
 
   constructor(props) { //Constructor sets up properties for the income class
     super(props);
+    //Income
     this.onChangePrimaryIncome = this.onChangePrimaryIncome.bind(this);
     this.onChangeSecondIncome = this.onChangeSecondIncome.bind(this);
     this.onChangeInvestments = this.onChangeInvestments.bind(this);
     this.onChangeExpenses = this.onChangeExpenses.bind(this);
+    //Expenses
+    this.onChangeFood = this.onChangeFood.bind(this);
+    this.onChangeHousing = this.onChangeHousing.bind(this);
+    this.onChangeEntertainment = this.onChangeEntertainment.bind(this);
+    this.onChangeTransportation = this.onChangeTransportation.bind(this);
+    this.onChangeMisc = this.onChangeMisc.bind(this);
     this.state = {
       income: '',
       secondIncome: '',
-      investments: ''
+      investments: '',
+      food: '',
+      housing: '',
+      entertainment: '',
+      transportation: '',
+      misc: ''
     }
   }
 
   // Form Events
   onChangePrimaryIncome(e) {
-        this.setState({ income: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
-    }
-    onChangeSecondIncome(e) {
+      this.setState({ income: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+  }
+   onChangeSecondIncome(e) {
       this.setState({ secondIncome: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
   }
   onChangeInvestments(e) {
@@ -43,25 +55,49 @@ export default class Overview extends Component {
   onChangeExpenses(e) {
       this.setState({ expenses: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
   }
+  onChangeFood(e) {
+    this.setState({ food: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+  }
+  onChangeHousing(e) {
+    this.setState({ housing: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+  }
+  onChangeEntertainment(e) {
+    this.setState({ entertainment: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+  }
+  onChangeTransportation(e) {
+    this.setState({ transportation: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+  }
+  onChangeMisc(e) {
+    this.setState({ misc: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+  }
 
 
   // React Life Cycle
   componentDidMount() {
     this.incomeData = JSON.parse(localStorage.getItem('incomeStorage'));
-    this.expensesData = JSON.parse(localStorage.getItem('expensesStorage'));
+    this.expensesData = JSON.parse(localStorage.getItem('expensesStorage')); //cookie for expenses
 
     if (localStorage.getItem('incomeStorage')) { //Searches local storage in browser for item "user" and assigns the data retrieved from the form events
         this.setState({
             income: this.incomeData.income,
             secondIncome: this.incomeData.secondIncome,
             investments: this.incomeData.investments,
+            food: this.expensesData.food,
+            housing: this.expensesData.housing,
+            entertainment: this.expensesData.entertainment,
+            transportation: this.expensesData.transportation,
+            misc: this.expensesData.misc
         })
     } else {
         this.setState({
-            income: '',
-            secondIncome: '',
-            investments: '',
-            expenses: ''
+          income: '',
+          secondIncome: '',
+          investments: '',
+          food: '',
+          housing: '',
+          entertainment: '',
+          transportation: '',
+          misc: ''
         })
     }
   }
@@ -122,14 +158,14 @@ export default class Overview extends Component {
         <p class="lead mb-0 text-end">Net Profit Margin</p>
         
             <p className='text-end h6' data-toggle="tooltip" title="Annual Household Income">
-              AHHI: ${(parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments))}
+              AHHI: ${(parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments)).toLocaleString()}
             </p>
             <p className='text-end h6 '>
-            - Expenses: ${(parseInt(this.state.expenses))}
+            - Expenses: ${(parseInt(this.state.food)+parseInt(this.state.housing)+parseInt(this.state.entertainment)+parseInt(this.state.transportation)+parseInt(this.state.misc)).toLocaleString()}
             </p>
             <hr></hr>
             <p className='text-end h6 '>
-            Available funds: ${parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments)-(parseInt(this.state.expenses))}
+            Available funds: ${((parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments))-(parseInt(this.state.food)+parseInt(this.state.housing)+parseInt(this.state.entertainment)+parseInt(this.state.transportation)+parseInt(this.state.misc))).toLocaleString()}
             </p>
             <small className='text-end d-block'>
             Note: You may need to refresh the page in order for the data charts to update
