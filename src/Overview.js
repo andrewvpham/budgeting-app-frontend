@@ -1,4 +1,5 @@
 import { PieChart } from 'react-minimal-pie-chart';
+import {onSubmit} from './Income';
 
 
 import React, { Component } from 'react';
@@ -20,10 +21,13 @@ export default class Overview extends Component {
   constructor(props) { //Constructor sets up properties for the income class
     super(props);
     this.onChangePrimaryIncome = this.onChangePrimaryIncome.bind(this);
+    this.onChangeSecondIncome = this.onChangeSecondIncome.bind(this);
+    this.onChangeInvestments = this.onChangeInvestments.bind(this);
     this.onChangeExpenses = this.onChangeExpenses.bind(this);
     this.state = {
-        income: '',
-        expenses:''
+      income: '',
+      secondIncome: '',
+      investments: ''
     }
   }
 
@@ -31,6 +35,12 @@ export default class Overview extends Component {
   onChangePrimaryIncome(e) {
         this.setState({ income: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
     }
+    onChangeSecondIncome(e) {
+      this.setState({ secondIncome: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+  }
+  onChangeInvestments(e) {
+    this.setState({ investments: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
+  }
   onChangeExpenses(e) {
       this.setState({ expenses: e.target.value }) //e.target.value retrieves the value of that element (input field for example) which is Name
   }
@@ -41,11 +51,15 @@ export default class Overview extends Component {
     this.incomeData = JSON.parse(localStorage.getItem('incomeStorage'));
     if (localStorage.getItem('incomeStorage')) { //Searches local storage in browser for item "user" and assigns the data retrieved from the form events
         this.setState({
-            income: this.incomeData.income
+            income: this.incomeData.income,
+            secondIncome: this.incomeData.secondIncome,
+            investments: this.incomeData.investments
         })
     } else {
         this.setState({
-            income: ''
+            income: '',
+            secondIncome: '',
+            investments: ''
         })
     }
   }
@@ -57,44 +71,44 @@ export default class Overview extends Component {
 
 
  render() {
+
   console.log(typeof this.state.income);
   return (
-    
     //Expenses
-    <div className="container rounded bg-light mb-5 mt-4 p-4">
-      <p className="h2">Overview component</p>
-      <div className="row">
-      <div className="col-lg-3 mt-3">
-      <PieChart
-          data={[
-            { title: 'Primary Income', value: parseInt(this.state.income), color: '#E38627'},
-            { title: 'Secondary Income', value: 15, color: '#C13C37' },
-            { title: 'Investments', value: 20, color: '#6A2135' },
-          ]}
-          label={({ dataEntry }) => dataEntry.value}
-          labelStyle={{
-            ...defaultLabelStyle,
-          }}
-        />
-      </div>
-      <div className="col-lg-3 mt-3">
-      <PieChart
-          data={[
-            { title: 'Entertainment', value: 10, color: '#E38627'},
-            { title: 'Food', value: 15, color: '#C13C37' },
-            { title: 'Housing', value: 20, color: '#6A2135' },
-          ]}
-          label={({ dataEntry }) => dataEntry.value}
-          labelStyle={{
-            ...defaultLabelStyle,
-          }}
-        />
-      </div>
+      <div className="container rounded bg-light mb-5 mt-4 p-4">
+        <p className="h2">Overview component</p>
+        <div className="row">
+        <div className="col-lg-3 mt-3">
+        <PieChart
+            data={[
+              { title: 'Primary Income', value: parseInt(this.state.income), color: '#E38627'},
+              { title: 'Secondary Income', value: parseInt(this.state.secondIncome), color: '#C13C37' },
+              { title: 'Investments', value: parseInt(this.state.investments), color: '#6A2135' },
+            ]}
+            label={({ dataEntry }) => dataEntry.value}
+            labelStyle={{
+              ...defaultLabelStyle,
+            }}
+          />
+        </div>
+        <div className="col-lg-3 mt-3">
+        <PieChart
+            data={[
+              { title: 'Entertainment', value: 10, color: '#E38627'},
+              { title: 'Food', value: 15, color: '#C13C37' },
+              { title: 'Housing', value: 20, color: '#6A2135' },
+            ]}
+            label={({ dataEntry }) => dataEntry.value}
+            labelStyle={{
+              ...defaultLabelStyle,
+            }}
+          />
+        </div>
 
+        </div>
+        
       </div>
-      
-    </div>
-  )
+    )
   }
 }
 
