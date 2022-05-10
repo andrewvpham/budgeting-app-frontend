@@ -49,9 +49,7 @@ export default class Overview extends Component {
   componentDidMount() {
     this.incomeData = JSON.parse(localStorage.getItem('incomeStorage'));
     this.expensesData = JSON.parse(localStorage.getItem('expensesStorage'));
-    this.setState({
-      expenses: this.expensesData.expenses
-    })
+
     if (localStorage.getItem('incomeStorage')) { //Searches local storage in browser for item "user" and assigns the data retrieved from the form events
         this.setState({
             income: this.incomeData.income,
