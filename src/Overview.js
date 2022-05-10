@@ -10,7 +10,6 @@ const defaultLabelStyle = {
   fill: 'white',
 };
 
-var incomeOverview = "";
 
 export default class Overview extends Component {
 
@@ -49,17 +48,22 @@ export default class Overview extends Component {
   // React Life Cycle
   componentDidMount() {
     this.incomeData = JSON.parse(localStorage.getItem('incomeStorage'));
+    this.expensesData = JSON.parse(localStorage.getItem('expensesStorage'));
+    this.setState({
+      expenses: this.expensesData.expenses
+    })
     if (localStorage.getItem('incomeStorage')) { //Searches local storage in browser for item "user" and assigns the data retrieved from the form events
         this.setState({
             income: this.incomeData.income,
             secondIncome: this.incomeData.secondIncome,
-            investments: this.incomeData.investments
+            investments: this.incomeData.investments,
         })
     } else {
         this.setState({
             income: '',
             secondIncome: '',
-            investments: ''
+            investments: '',
+            expenses: ''
         })
     }
   }
@@ -79,7 +83,7 @@ export default class Overview extends Component {
         <p className="h2">Overview</p>
         <div className="row">
         <div className="col-lg-2 mt-3">
-        <p class="lead mb-0">Income Chart</p>
+        <p class="lead mb-0">Income Data Chart</p>
         <PieChart
             data={[
               { title: 'Primary Income', value: parseInt(this.state.income), color: '#bc5090'},
@@ -93,7 +97,7 @@ export default class Overview extends Component {
           />
         </div>
         <div className="col-lg-2 mt-3 ">
-        <p class="lead mb-0">Expenses Chart</p>
+        <p class="lead mb-0">Expenses Data Chart</p>
         <PieChart
             data={[
               { title: 'Entertainment', value: 10, color: '#004c6d'},
@@ -105,6 +109,20 @@ export default class Overview extends Component {
               ...defaultLabelStyle,
             }}
           />
+        </div>
+        <div className='col-lg-2 mt-3 '>
+        <p class="lead mb-0 text-end">Net Profit Margin</p>
+        
+            <p className='text-end h6'>
+              AHHI: ${(parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments))}
+            </p>
+            <p className='text-end h6 '>
+            - Expenses: ${(parseInt(this.state.expenses))}
+            </p>
+            <hr></hr>
+            <p className='text-end h6 '>
+            Available funds: ${parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments)-(parseInt(this.state.expenses))}
+            </p>
         </div>
 
         </div>
