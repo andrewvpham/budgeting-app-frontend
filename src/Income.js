@@ -66,19 +66,19 @@ export default class Income extends Component {
         return (
           <div className="container rounded bg-light mb-5 mt-4 p-4">
           <p className="h2">Income <span class="bi bi-pencil-square h6"></span></p>
-          <p className='h4'>Total annual income: $ {parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments)}</p>
+          <p className='h4'>Total annual income: $ {(parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments)).toLocaleString()}</p>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group mb-3">
                         <label>Enter primary income:</label>
-                        <input type="text" className="form-control" value={this.state.income} onChange={this.onChangePrimaryIncome} />
+                        <input type="number" className="form-control" value={this.state.income} onChange={this.onChangePrimaryIncome} />
                     </div>
                     <div className="form-group mb-3">
                         <label>Enter secondary income:</label>
-                        <input type="text" className="form-control" value={this.state.secondIncome} onChange={this.onChangeSecondIncome} />
+                        <input type="number" className="form-control" value={this.state.secondIncome} onChange={this.onChangeSecondIncome} />
                     </div>
                     <div className="form-group mb-3">
                         <label>Enter investments:</label>
-                        <input type="text" className="form-control" value={this.state.investments} onChange={this.onChangeInvestments} />
+                        <input type="number" className="form-control" value={this.state.investments} onChange={this.onChangeInvestments} />
                     </div>
                     <button type="submit" className="btn btn-primary btn-block">Submit</button>
                 </form>
