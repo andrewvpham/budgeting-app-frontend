@@ -85,20 +85,30 @@ export default class Overview extends Component {
         <div className="col-lg-2 mt-3">
         <p class="lead mb-0">Income Data Chart</p>
         <PieChart
+            animate
+            animationDuration={800}
+            animationEasing="ease-out"
+            center={[50, 50]}
             data={[
               { title: 'Primary Income', value: parseInt(this.state.income), color: '#bc5090'},
               { title: 'Secondary Income', value: parseInt(this.state.secondIncome), color: '#ff6361' },
               { title: 'Investments', value: parseInt(this.state.investments), color: '#ffa600' },
             ]}
             label={({ dataEntry }) => dataEntry.value}
+            
             labelStyle={{
               ...defaultLabelStyle,
+              
             }}
           />
         </div>
         <div className="col-lg-2 mt-3 ">
         <p class="lead mb-0">Expenses Data Chart</p>
         <PieChart
+            animate
+            animationDuration={1000}
+            animationEasing="ease-out"
+            center={[50, 50]}
             data={[
               { title: 'Entertainment', value: 10, color: '#004c6d'},
               { title: 'Food', value: 15, color: '#7aa6c2' },
@@ -113,7 +123,7 @@ export default class Overview extends Component {
         <div className='col-lg-2 mt-3 '>
         <p class="lead mb-0 text-end">Net Profit Margin</p>
         
-            <p className='text-end h6'>
+            <p className='text-end h6' data-toggle="tooltip" title="Annual Household Income">
               AHHI: ${(parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments))}
             </p>
             <p className='text-end h6 '>
