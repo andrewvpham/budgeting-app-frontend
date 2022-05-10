@@ -133,6 +133,9 @@ export default class Overview extends Component {
             <p className='text-end h6 '>
             Available funds: ${parseInt(this.state.income)+parseInt(this.state.secondIncome)+parseInt(this.state.investments)-(parseInt(this.state.expenses))}
             </p>
+            <small className='text-end d-block'>
+            Note: You may need to refresh the page in order for the data charts to update
+            </small>
         </div>
 
         </div>
