@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 export default class Income extends Component {
 
-  userData; //Variable that we'll store data in
+  incomeData; //Variable that we'll store data in
 
   constructor(props) { //Constructor sets up properties for the income class
     super(props);
@@ -30,10 +30,10 @@ export default class Income extends Component {
 
   // React Life Cycle
   componentDidMount() {
-    this.userData = JSON.parse(localStorage.getItem('incomeStorage'));
+    this.incomeData = JSON.parse(localStorage.getItem('incomeStorage'));
     if (localStorage.getItem('incomeStorage')) { //Searches local storage in browser for item "user" and assigns the data retrieved from the form events
         this.setState({
-            income: this.userData.income
+            income: this.incomeData.income
         })
     } else {
         this.setState({
@@ -51,7 +51,7 @@ export default class Income extends Component {
  render() {
         return (
           <div className="container rounded bg-light mb-5 mt-4 p-4">
-          <p className="h2">Income component <span class="bi bi-pencil-square h4"></span></p>
+          <p className="h2">Income <span class="bi bi-pencil-square h6"></span></p>
           <p className='h4'>{this.state.income}</p>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group mb-3">

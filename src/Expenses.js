@@ -41,6 +41,7 @@ export default class Expenses extends Component {
     }
   }
 
+// componentWillUpdate is apparently deprecated...need to figure out up to date method
   componentWillUpdate(nextProps, nextState) { //This triggers before the rendering happens and sets up the form state in local storage
     localStorage.setItem('expensesStorage', JSON.stringify(nextState));
   }
@@ -50,7 +51,7 @@ export default class Expenses extends Component {
 render() {
         return (
           <div className="container rounded bg-light mb-5 mt-4 p-4">
-          <p className="h2">Expenses component <span class="bi bi-pencil-square h4"></span></p>
+          <p className="h2">Expenses <span class="bi bi-pencil-square h6"></span></p>
           <p className='h4'>{this.state.expenses}</p>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group mb-3">
