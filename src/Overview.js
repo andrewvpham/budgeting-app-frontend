@@ -103,14 +103,14 @@ export default class Overview extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) { //This triggers before the rendering happens and sets up the form state in local storage
-    localStorage.setItem('incomeStorage', JSON.stringify(nextState));
+    localStorage.setItem('overviewStorage', JSON.stringify(nextState));
   }
 
 
 
  render() {
 
-  console.log(typeof this.state.income);
+  
   return (
     //Expenses
       <div className="container rounded bg-light mb-5 mt-4 p-4 pb-5">
@@ -144,9 +144,11 @@ export default class Overview extends Component {
             animationEasing="ease-out"
             center={[50, 50]}
             data={[
-              { title: 'Entertainment', value: 10, color: '#004c6d'},
-              { title: 'Food', value: 15, color: '#7aa6c2' },
-              { title: 'Housing', value: 20, color: '#c1e7ff' },
+              { title: 'Food', value: parseInt(this.state.food), color: '#004c6d'},
+              { title: 'Housing', value: parseInt(this.state.housing), color: '#346888' },
+              { title: 'Transportation', value: parseInt(this.state.transportation), color: '#5886a5' },
+              { title: 'Entertainment', value: parseInt(this.state.entertainment), color: '#7aa6c2' },
+              { title: 'Misc', value: parseInt(this.state.misc), color: '#c1e7ff' }
             ]}
             label={({ dataEntry }) => dataEntry.value}
             labelStyle={{
